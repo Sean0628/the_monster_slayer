@@ -18,10 +18,15 @@ new Vue({
         return;
       }
 
-      this.playerHealth -= this.calculateDamage(12, 5);
-      this.checkWin();
+      this.monsterAttacks();
     },
     specialAttack: function () {
+      this.monsterHealth -= this.calculateDamage(10, 3);
+
+      if (this.checkWin()) {
+        return;
+      }
+      this.monsterAttacks();
 
     },
     heal: function () {
@@ -30,7 +35,11 @@ new Vue({
     giveUp: function () {
 
     },
-    calculateDamage: function (min, max) {
+    monsterAttacks: function () {
+      this.playerHealth -= this.calculateDamage(12, 5);
+      this.checkWin();
+    },
+    calculateDamage: function (max, min) {
       return Math.max(Math.floor(Math.random() * max) + 1, min);
     },
     checkWin: function () {
